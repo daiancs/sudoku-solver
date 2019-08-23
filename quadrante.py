@@ -26,15 +26,23 @@ class Quadrante:
         """Retorna os possiveis valores de uma célula"""
         return self.__matriz[lin][col]
 
-    def get_linha(self, lin):
-        return self.__matriz[lin]
+    #def get_linha(self, lin):
+    #    return self.__matriz[lin]
 
-    def descobrir_valores_quadrante(self):
-        lado = range(len(self.__matriz))
-        for lin in lado:
-            for col in lado:
-                if len(self.get_possiveis_valores(lin, col)) > 1:
-                    self.__matriz[lin][col] = list(set(self.__matriz[lin][col]) - set(self.__valores_descobertos))
+    def descontar_valores_no_quadrante(self, lin, col, valores_descontar):
+        """Descontar valores já conhecidos no próprio quadrante e descontar conjunto passado por parâmetro.
+        Retorna True se descontou algo."""
+        descontou = False
+
+        valores_para_descontar = set(self.__matriz[lin][col]) & valores_descontar
+        valores_para_descontar.update(set(self.__matriz[lin][col]) & set(self.__valores_descobertos))
+        if len(valores_para_descontar) > 0:
+            descontou = True
+            self.__matriz[lin][col] = list(set(self.__matriz[lin][col]) - valores_para_descontar)
+
+            if len(self.__matriz[lin][col]) == 1:  # Encontrou o último valor possível
+                self.set_value(lin, col, self.__matriz[lin][col][0])
+        return descontou
 
 
 if __name__ == "__main__":
@@ -45,10 +53,11 @@ if __name__ == "__main__":
     quad1.set_value(1, 0, 6)
     quad1.set_value(2, 1, 9)
     quad1.set_value(2, 2, 8)
-    print(quad1._Quadrante__valores_descobertos)
-    quad1.descobrir_valores_quadrante()
+    # print(quad1._Quadrante__valores_descobertos)
+    quad1.descontar_valores_no_quadrante(0, 2, {7})
+    quad1.descontar_valores_no_quadrante(1, 1, {3, 5})
     print(quad1)
-    print(f"Valores possiveis lin 0, col 2: {quad1.get_possiveis_valores(0, 1)}")
+    print(f"Valores possiveis lin 0, col 2: {quad1.get_possiveis_valores(0, 2)}")
     print(f"Valores possiveis lin 1, col 1: {quad1.get_possiveis_valores(1, 1)}")
     print(f"Valores possiveis lin 1, col 2: {quad1.get_possiveis_valores(1, 2)}")
 
