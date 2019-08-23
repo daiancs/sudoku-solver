@@ -72,30 +72,30 @@ class GameBoard:
                                 descontou = quadrante.descontar_valores_no_quadrante(lin, col, valores)
 
             if not descontou:
-                print("Chegou ao fim do jogo!")
+                print("Encontrou o máximo de valores possível no momento.")
 
 
 if __name__ == "__main__":
     jogo = GameBoard()
 
-    jogo.inserir_valor(0, 0, 0, 5)
+    jogo.inserir_valor(0, 0, 0, 5)  # 0 == 0, 0
     jogo.inserir_valor(0, 0, 1, 3)
     jogo.inserir_valor(0, 1, 0, 6)
     jogo.inserir_valor(0, 2, 1, 9)
     jogo.inserir_valor(0, 2, 2, 8)
 
-    jogo.inserir_valor(1, 0, 1, 7)
+    jogo.inserir_valor(1, 0, 1, 7)  # 1 == 0, 1
     jogo.inserir_valor(1, 1, 0, 1)
     jogo.inserir_valor(1, 1, 1, 9)
     jogo.inserir_valor(1, 1, 2, 5)
 
-    jogo.inserir_valor(2, 2, 1, 6)
+    jogo.inserir_valor(2, 2, 1, 6)  # 2 == 0, 2
 
-    jogo.inserir_valor(3, 0, 0, 8)
+    jogo.inserir_valor(3, 0, 0, 8)  # 3 == 1, 0
     jogo.inserir_valor(3, 1, 0, 4)
     jogo.inserir_valor(3, 2, 0, 7)
 
-    jogo.inserir_valor(4, 0, 1, 6)
+    jogo.inserir_valor(4, 0, 1, 6)  # 4 == 1, 1
     jogo.inserir_valor(4, 1, 0, 8)
     jogo.inserir_valor(4, 1, 2, 3)
     jogo.inserir_valor(4, 2, 1, 2)
@@ -118,30 +118,5 @@ if __name__ == "__main__":
     jogo.inserir_valor(8, 2, 2, 9)
 
     print(jogo)
-
     jogo.descobrir_valores()
-    # print(f"Valores possiveis Q0; lin 0, col 2: {jogo[0][0].get_possiveis_valores(0, 2)}")
-    # print(f"Valores possiveis Q4; lin 1, col 1: {jogo[1][1].get_possiveis_valores(1, 1)}")
-    # print(f"Valores possiveis Q7; lin 2, col 2: {jogo[2][1].get_possiveis_valores(2, 2)}")
-    #
-    # print(f"Valores linha 0: {jogo.get_valores_lin(0, 0)}")
-    # print(f"Valores linha 1: {jogo.get_valores_lin(0, 1)}")
-    # print(f"Valores linha 2: {jogo.get_valores_lin(0, 2)}")
-    # print(f"Valores linha 3: {jogo.get_valores_lin(1, 0)}")
-    # print(f"Valores linha 4: {jogo.get_valores_lin(1, 1)}")
-    # print(f"Valores linha 5: {jogo.get_valores_lin(1, 2)}")
-    # print(f"Valores linha 6: {jogo.get_valores_lin(2, 0)}")
-    # print(f"Valores linha 7: {jogo.get_valores_lin(2, 1)}")
-    # print(f"Valores linha 8: {jogo.get_valores_lin(2, 2)}")
-    # print()
-    # print(f"Valores coluna 0: {jogo.get_valores_col(0, 0)}")
-    # print(f"Valores coluna 1: {jogo.get_valores_col(0, 1)}")
-    # print(f"Valores coluna 2: {jogo.get_valores_col(0, 2)}")
-    # print(f"Valores coluna 3: {jogo.get_valores_col(1, 0)}")
-    # print(f"Valores coluna 4: {jogo.get_valores_col(1, 1)}")
-    # print(f"Valores coluna 5: {jogo.get_valores_col(1, 2)}")
-    # print(f"Valores coluna 6: {jogo.get_valores_col(2, 0)}")
-    # print(f"Valores coluna 7: {jogo.get_valores_col(2, 1)}")
-    # print(f"Valores coluna 8: {jogo.get_valores_col(2, 2)}")
-
     print(jogo)
