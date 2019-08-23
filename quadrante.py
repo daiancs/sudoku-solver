@@ -1,6 +1,6 @@
 class Quadrante:
     def __init__(self):
-        self.__valores_descobertos = []
+        self.__valores_descobertos = set()
         self.__matriz = [[list(range(1, 10)) for i in range(3)] for i in range(3)]
 
     def __str__(self):
@@ -19,15 +19,11 @@ class Quadrante:
 
     def set_value(self, lin, col, valor):
         self.__matriz[lin][col] = [valor]
-        self.__valores_descobertos.append(valor)
-        self.__valores_descobertos.sort()
+        self.__valores_descobertos.add(valor)
 
     def get_possiveis_valores(self, lin, col):
         """Retorna os possiveis valores de uma célula"""
         return self.__matriz[lin][col]
-
-    #def get_linha(self, lin):
-    #    return self.__matriz[lin]
 
     def descontar_valores_no_quadrante(self, lin, col, valores_descontar):
         """Descontar valores já conhecidos no próprio quadrante e descontar conjunto passado por parâmetro.
@@ -35,7 +31,7 @@ class Quadrante:
         descontou = False
 
         valores_para_descontar = set(self.__matriz[lin][col]) & valores_descontar
-        valores_para_descontar.update(set(self.__matriz[lin][col]) & set(self.__valores_descobertos))
+        valores_para_descontar.update(set(self.__matriz[lin][col]) & self.__valores_descobertos)
         if len(valores_para_descontar) > 0:
             descontou = True
             self.__matriz[lin][col] = list(set(self.__matriz[lin][col]) - valores_para_descontar)
@@ -60,4 +56,3 @@ if __name__ == "__main__":
     print(f"Valores possiveis lin 0, col 2: {quad1.get_possiveis_valores(0, 2)}")
     print(f"Valores possiveis lin 1, col 1: {quad1.get_possiveis_valores(1, 1)}")
     print(f"Valores possiveis lin 1, col 2: {quad1.get_possiveis_valores(1, 2)}")
-
