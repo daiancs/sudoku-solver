@@ -8,3 +8,5 @@ O aplicativo tem objetivo de tentar resolver o jogo de Sudoku sem a preocupaçã
     A classe GameBoard contém uma matriz 3x3 de células e é o desenho principal do jogo.
     
 23/08: Menus de interação com usuário permitem criação de novos jogos mais facilmente. Também é possível consultar valores possíveis de uma célula quando o jogo não pode ser totalmente resolvido com o algoritmo atual.
+
+25/08: Permite digitar um novo jogo sem os espaços entre os valores de cada linha. Correção importante no algoritmo. Melhor organização dos métodos da classe GameBoard.
