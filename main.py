@@ -1,4 +1,4 @@
-import gameboard
+from gameboard import GameBoard
 
 
 def menu_inicial():
@@ -14,27 +14,17 @@ def menu_jogo():
     return int(input("Opção: "))
 
 
-def get_numero_quadrante(lin, col):
-    """Retorna o número do quadrante para os valores absolutos de linha e coluna"""
-    return ((lin // 3) * 3) + (col // 3)
-
-
 def novo_jogo():
-    jogo = gameboard.GameBoard()
+    jogo = GameBoard()
     linhas = range(9)
     for linha in linhas:
-        linha_de_valores = [int(val) for val in input(f"Valores [0..9] da linha {linha}: ").split()]
+        linha_de_valores = [int(val) for val in input(f"Valores [0..9] da linha {linha}: ")]
 
         for col, valor in enumerate(linha_de_valores):
             if valor != 0:
-                quad = get_numero_quadrante(linha, col)
+                quad = GameBoard.get_numero_quadrante(linha, col)
                 jogo.inserir_valor(quad, linha % 3, col % 3, valor)
     return jogo
-
-
-def get_valores_possiveis(lin, col):
-    quadrante = get_numero_quadrante(lin, col)
-    return jogo[quadrante // 3][quadrante % 3].get_possiveis_valores(lin % 3, col % 3)
 
 
 while True:
@@ -55,5 +45,5 @@ while True:
             elif opcao_jogo == 2:
                 lin = int(input("Linha: "))
                 col = int(input("Coluna: "))
-                valores = sorted(get_valores_possiveis(lin, col))
+                valores = sorted(jogo.get_valores_possiveis_jogo(lin, col))
                 print(f"Valores possíveis: {valores}")
