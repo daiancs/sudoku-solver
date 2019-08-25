@@ -25,9 +25,19 @@ class GameBoard:
     def __getitem__(self, item):
         return self.__gameboard[item]
 
+    @staticmethod
+    def get_numero_quadrante(lin, col):
+        """Retorna o número do quadrante para os valores absolutos de linha e coluna"""
+        return ((lin // 3) * 3) + (col // 3)
+
     def inserir_valor(self, quad, lin, col, valor):
         """Insere valores iniciais no jogo."""
         self.__gameboard[quad // 3][quad % 3].set_value(lin, col, valor)
+
+    def get_valores_possiveis_jogo(self, lin, col):
+        """Retorna lista de valores ainda possíves para aquela célula."""
+        quadrante = self.get_numero_quadrante(lin, col)
+        return self[quadrante // 3][quadrante % 3].get_possiveis_valores(lin % 3, col % 3)
 
     def get_valores_lin(self, fila, lin):
         """Retorna os valores já descobertos de uma determinada linha.
@@ -63,16 +73,19 @@ class GameBoard:
                 for numero_coluna, quadrante in enumerate(fileira):
                     for lin in lado:
                         for col in lado:
-                            if len(quadrante.get_possiveis_valores(lin, col)) > 1:
+                            qtd_valores_possiveis = len(quadrante.get_possiveis_valores(lin, col))
+                            if qtd_valores_possiveis > 1:
                                 valores = []
                                 valores.extend(self.get_valores_lin(numero_fila, lin))
                                 valores.extend(self.get_valores_col(numero_coluna, col))
                                 valores = set(valores)
 
-                                descontou = quadrante.descontar_valores_no_quadrante(lin, col, valores)
+                                quadrante.descontar_valores_no_quadrante(lin, col, valores)
+                                if not descontou:
+                                    descontou = qtd_valores_possiveis > len(quadrante.get_possiveis_valores(lin, col))
 
             if not descontou:
-                print("Encontrou o máximo de valores possível no momento.")
+                print("Encontrou o máximo de valores no momento.")
 
 
 if __name__ == "__main__":
