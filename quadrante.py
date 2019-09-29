@@ -18,6 +18,7 @@ class Quadrante:
         return self.__matriz[item]
 
     def set_value(self, lin, col, valor):
+        """Insere valor na célula correspondente do quadrante"""
         self.__matriz[lin][col] = [valor]
         self.__valores_descobertos.add(valor)
 
@@ -35,19 +36,3 @@ class Quadrante:
 
             if len(self.__matriz[lin][col]) == 1:  # Encontrou o último valor possível
                 self.set_value(lin, col, self.__matriz[lin][col][0])
-
-
-if __name__ == "__main__":
-    quad1 = Quadrante()
-
-    quad1.set_value(0, 0, 5)
-    quad1.set_value(0, 1, 3)
-    quad1.set_value(1, 0, 6)
-    quad1.set_value(2, 1, 9)
-    quad1.set_value(2, 2, 8)
-    quad1.descontar_valores_no_quadrante(0, 2, {7})
-    quad1.descontar_valores_no_quadrante(1, 1, {3, 5})
-    print(quad1)
-    print(f"Valores possiveis lin 0, col 2: {quad1.get_possiveis_valores(0, 2)}")
-    print(f"Valores possiveis lin 1, col 1: {quad1.get_possiveis_valores(1, 1)}")
-    print(f"Valores possiveis lin 1, col 2: {quad1.get_possiveis_valores(1, 2)}")

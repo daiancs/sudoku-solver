@@ -25,19 +25,17 @@ class GameBoard:
     def __getitem__(self, item):
         return self.__gameboard[item]
 
-    @staticmethod
-    def get_numero_quadrante(lin, col):
-        """Retorna o número do quadrante para os valores absolutos de linha e coluna"""
-        return ((lin // 3) * 3) + (col // 3)
-
-    def inserir_valor(self, quad, lin, col, valor):
+    def inserir_valor(self, quadrante, celula, valor):
         """Insere valores iniciais no jogo."""
-        self.__gameboard[quad // 3][quad % 3].set_value(lin, col, valor)
+        lin = celula // 3
+        col = celula % 3
+        self.__gameboard[quadrante // 3][quadrante % 3].set_value(lin, col, valor)
 
-    def get_valores_possiveis_jogo(self, lin, col):
+    def get_valores_possiveis_jogo(self, quadrante, celula):
         """Retorna lista de valores ainda possíves para aquela célula."""
-        quadrante = self.get_numero_quadrante(lin, col)
-        return self[quadrante // 3][quadrante % 3].get_possiveis_valores(lin % 3, col % 3)
+        lin = celula // 3
+        col = celula % 3
+        return self[quadrante // 3][quadrante % 3].get_possiveis_valores(lin, col)
 
     def get_valores_lin(self, fila, lin):
         """Retorna os valores já descobertos de uma determinada linha.
@@ -86,50 +84,3 @@ class GameBoard:
 
             if not descontou:
                 print("Encontrou o máximo de valores no momento.")
-
-
-if __name__ == "__main__":
-    jogo = GameBoard()
-
-    jogo.inserir_valor(0, 0, 0, 5)  # 0 == 0, 0
-    jogo.inserir_valor(0, 0, 1, 3)
-    jogo.inserir_valor(0, 1, 0, 6)
-    jogo.inserir_valor(0, 2, 1, 9)
-    jogo.inserir_valor(0, 2, 2, 8)
-
-    jogo.inserir_valor(1, 0, 1, 7)  # 1 == 0, 1
-    jogo.inserir_valor(1, 1, 0, 1)
-    jogo.inserir_valor(1, 1, 1, 9)
-    jogo.inserir_valor(1, 1, 2, 5)
-
-    jogo.inserir_valor(2, 2, 1, 6)  # 2 == 0, 2
-
-    jogo.inserir_valor(3, 0, 0, 8)  # 3 == 1, 0
-    jogo.inserir_valor(3, 1, 0, 4)
-    jogo.inserir_valor(3, 2, 0, 7)
-
-    jogo.inserir_valor(4, 0, 1, 6)  # 4 == 1, 1
-    jogo.inserir_valor(4, 1, 0, 8)
-    jogo.inserir_valor(4, 1, 2, 3)
-    jogo.inserir_valor(4, 2, 1, 2)
-
-    jogo.inserir_valor(5, 0, 2, 3)
-    jogo.inserir_valor(5, 1, 2, 1)
-    jogo.inserir_valor(5, 2, 2, 6)
-
-    jogo.inserir_valor(6, 0, 1, 6)
-
-    jogo.inserir_valor(7, 1, 0, 4)
-    jogo.inserir_valor(7, 1, 1, 1)
-    jogo.inserir_valor(7, 1, 2, 9)
-    jogo.inserir_valor(7, 2, 1, 8)
-
-    jogo.inserir_valor(8, 0, 0, 2)
-    jogo.inserir_valor(8, 0, 1, 8)
-    jogo.inserir_valor(8, 1, 2, 5)
-    jogo.inserir_valor(8, 2, 1, 7)
-    jogo.inserir_valor(8, 2, 2, 9)
-
-    print(jogo)
-    jogo.descobrir_valores()
-    print(jogo)
