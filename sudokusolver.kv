@@ -1,0 +1,67 @@
+<MainGrid>:
+    anchor_x: "center"
+    anchor_y: "center"
+
+<GameGrid>:
+    cols: 3
+    size_hint: (None, .9)
+    width: self.height
+    spacing: 5
+    padding: 5
+    # This draws a background for the whole grid.
+    # When used with spacing and padding, part of the background will show.
+    canvas.before:
+        Color:
+            rgba: [.6, .6, .6, 1]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<QuadranteGrid>:
+    cols: 3
+    spacing: .25
+    canvas.before:
+        Color:
+            rgba: [.3, .3, .3, 1]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ButtonsGrid>:
+    cols: 2
+    size_hint: (1, .2)
+    Button:
+        id: btn_resolver
+        text: "Resolver"
+        on_release: root.resolver()
+    Button:
+        id: btn_zerar
+        text: "Zerar"
+        on_release: root.zerar()
+    Button:
+        id: btn_validar
+        text: "Validar"
+        on_release: root.validar()
+    Button:
+        id: btn_sair
+        hint_text: "Sair do programa"
+        text: "Sair"
+        on_release: root.sair()
+
+<SelectNumberPopup>:
+    auto_dismiss: False
+    title: 'Select a number'
+    size_hint: (None, None)
+    size: (174, 241)
+
+<ButtonsPopup>:
+    cols: 2
+    size_hint: (1, .2)
+    Button:
+        id: btn_limpar
+        text: "Limpar"
+        on_release: root.limpar()
+    Button:
+        id: btn_cancelar
+        text: "Cancelar"
+        on_release: root.cancelar()
