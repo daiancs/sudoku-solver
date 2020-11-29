@@ -32,14 +32,14 @@ def solve(game):
                 for i in range(1, 10):
                     if is_possible(game, r, c, i):
                         game[r][c] = i
-                        print(*game, sep="\n")
-                        input()
                         solve(game)
+                        game[r][c] = 0
                 return
 
     # prints out the solved puzzle
     print(*game, sep="\n")
     exit()
+
 
 if __name__ == "__main__":
     game = [[0 for x in range(9)] for _ in range(9)]
